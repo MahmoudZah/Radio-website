@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
 import { createStage } from './stage'
 
-// 1 unit = 10 mm. Real proportions: 50 mm pipe, 75 turns of 0.3 mm wire over about 25 mm.
+// 1 unit = 10 mm. Keep the 50 mm former and the measured winding counts.
 const PIPE_R = 2.5
-const PIPE_LEN = 15
+const PIPE_HEIGHT = 6
 const WIRE_R = 0.022
-const COIL = { turns: 75, len: 2.5, x0: -1.2 }
-const LOOP = { turns: 5, len: 0.18, x0: -5.4 } // a few cm from the coil, same pipe, same axis
+const COIL = { turns: 75, len: 3, y0: -2.65 }
+const LOOP = { turns: 5, len: 0.18, y0: 2.55 }
 
 const labels = [
-  { id: 'coil', text: '75-turn coil · L ≈ 291 µH', at: [COIL.x0 + COIL.len / 2, PIPE_R + 0.2, 0] },
-  { id: 'loop', text: '5-turn test loop', at: [LOOP.x0 + LOOP.len / 2, PIPE_R + 0.2, 0] },
-  { id: 'gap', text: 'a few cm apart', at: [(LOOP.x0 + LOOP.len + COIL.x0) / 2, -PIPE_R - 0.4, 0] },
+  { id: 'coil', text: '75-turn coil · L ≈ 291 µH', at: [0, COIL.y0 + COIL.len / 2, PIPE_R + 0.25] },
+  { id: 'loop', text: '5-turn test loop', at: [0, LOOP.y0 + LOOP.len + 0.25, PIPE_R + 0.25] },
+  { id: 'gap', text: 'a few cm apart', at: [PIPE_R + 0.4, (COIL.y0 + COIL.len + LOOP.y0) / 2, 0] },
 ]
 
 /** The coil and test loop on their PVC pipe, built from the real dimensions. Drag to turn. */
@@ -30,53 +30,61 @@ export function CoilScene({ className = '' }) {
         const { THREE, scene, camera, controls, start, contactShadow } = stage
 
         class Helix extends THREE.Curve {
-          constructor(turns, len, x0, r) {
+          constructor(turns, len, y0, r) {
             super()
-            Object.assign(this, { turns, len, x0, r })
+            Object.assign(this, { turns, len, y0, r })
           }
           getPoint(t, out = new THREE.Vector3()) {
             const a = t * this.turns * Math.PI * 2
-            return out.set(this.x0 + t * this.len, this.r * Math.cos(a), this.r * Math.sin(a))
+            return out.set(this.r * Math.sin(a), this.y0 + t * this.len, this.r * Math.cos(a))
           }
         }
 
-        const copper = new THREE.MeshStandardMaterial({ color: 0xb8642e, metalness: 1, roughness: 0.3 })
-        const pvc = new THREE.MeshStandardMaterial({ color: 0xe0e0e0, roughness: 0.62, metalness: 0 })
-        const pvcInner = new THREE.MeshStandardMaterial({ color: 0x9a9a9a, roughness: 0.8, side: THREE.BackSide })
-        const tape = new THREE.MeshStandardMaterial({ color: 0xff5321, roughness: 0.7 })
+        const copper = new THREE.MeshStandardMaterial({ color: 0xb8642e, metalness: 0.88, roughness: 0.26 })
+        const pvc = new THREE.MeshStandardMaterial({ color: 0xe7e2d5, roughness: 0.48, metalness: 0 })
+        const pvcInner = new THREE.MeshStandardMaterial({ color: 0xb9b5aa, roughness: 0.78, side: THREE.BackSide })
+        const tape = new THREE.MeshStandardMaterial({ color: 0x171816, roughness: 0.72 })
+        const rimBlue = new THREE.MeshStandardMaterial({ color: 0x45bce7, roughness: 0.3, metalness: 0.15 })
 
         const group = new THREE.Group()
         scene.add(group)
 
-        // the pipe: outer wall, inner wall, end rings
-        const outer = new THREE.Mesh(new THREE.CylinderGeometry(PIPE_R, PIPE_R, PIPE_LEN, 96, 1, true), pvc)
-        const inner = new THREE.Mesh(new THREE.CylinderGeometry(PIPE_R - 0.16, PIPE_R - 0.16, PIPE_LEN, 96, 1, true), pvcInner)
-        ;[outer, inner].forEach((m) => {
-          m.rotation.z = Math.PI / 2
-          group.add(m)
-        })
-        ;[-1, 1].forEach((side) => {
-          const ring = new THREE.Mesh(new THREE.RingGeometry(PIPE_R - 0.16, PIPE_R, 96), pvc)
-          ring.rotation.y = (side * Math.PI) / 2
-          ring.position.x = (side * PIPE_LEN) / 2
-          group.add(ring)
-        })
+        // Hollow upright former, with the open rim visible from above.
+        group.add(new THREE.Mesh(new THREE.CylinderGeometry(PIPE_R, PIPE_R, PIPE_HEIGHT, 96, 1, true), pvc))
+        group.add(new THREE.Mesh(new THREE.CylinderGeometry(PIPE_R - 0.18, PIPE_R - 0.18, PIPE_HEIGHT - 0.2, 96, 1, true), pvcInner))
+        const lip = new THREE.Mesh(new THREE.RingGeometry(PIPE_R - 0.25, PIPE_R, 96), pvc)
+        lip.rotation.x = -Math.PI / 2
+        lip.position.y = PIPE_HEIGHT / 2
+        group.add(lip)
+        const innerRim = new THREE.Mesh(new THREE.TorusGeometry(PIPE_R - 0.27, 0.045, 10, 96), rimBlue)
+        innerRim.rotation.x = Math.PI / 2
+        innerRim.position.y = PIPE_HEIGHT / 2 - 0.03
+        group.add(innerRim)
+        const baseRim = new THREE.Mesh(new THREE.RingGeometry(PIPE_R - 0.18, PIPE_R, 96), pvc)
+        baseRim.rotation.x = Math.PI / 2
+        baseRim.position.y = -PIPE_HEIGHT / 2
+        group.add(baseRim)
 
-        const winding = ({ turns, len, x0 }) => {
-          const curve = new Helix(turns, len, x0, PIPE_R + WIRE_R)
+        // Four black tape strips cross the plastic shell and copper winding.
+        for (let index = 0; index < 4; index += 1) {
+          const angle = (index * Math.PI) / 2 - 0.12
+          const strip = new THREE.Mesh(
+            new THREE.CylinderGeometry(PIPE_R + 0.035, PIPE_R + 0.035, PIPE_HEIGHT - 0.35, 24, 1, true, angle, 0.34),
+            tape,
+          )
+          group.add(strip)
+        }
+
+        const winding = ({ turns, len, y0 }) => {
+          const curve = new Helix(turns, len, y0, PIPE_R + WIRE_R)
           group.add(new THREE.Mesh(new THREE.TubeGeometry(curve, turns * 56, WIRE_R, 6, false), copper))
-          // tape at each end, and the wire tails
+          // Short wire tails leave the winding ends, as on the photographed build.
           ;[0, 1].forEach((end) => {
-            const x = x0 + end * len + (end ? 0.14 : -0.14)
-            const band = new THREE.Mesh(new THREE.CylinderGeometry(PIPE_R + 0.03, PIPE_R + 0.03, 0.22, 64, 1, true), tape)
-            band.rotation.z = Math.PI / 2
-            band.position.x = x
-            group.add(band)
             const p = curve.getPoint(end)
             const tail = new THREE.CatmullRomCurve3([
               p.clone(),
-              p.clone().add(new THREE.Vector3(end ? 0.3 : -0.3, 0.5, 0.2)),
-              p.clone().add(new THREE.Vector3(end ? 0.5 : -0.5, 1.6, 0.8)),
+              p.clone().add(new THREE.Vector3(end ? 0.12 : -0.12, end ? 0.35 : -0.3, 0.35)),
+              p.clone().add(new THREE.Vector3(end ? 0.22 : -0.22, end ? 1.05 : -0.65, 0.55)),
             ])
             group.add(new THREE.Mesh(new THREE.TubeGeometry(tail, 24, WIRE_R * 1.4, 6, false), copper))
           })
@@ -84,10 +92,10 @@ export function CoilScene({ className = '' }) {
         winding(COIL)
         winding(LOOP)
 
-        group.position.x = 1.2
-        contactShadow(18, 7, -PIPE_R - 0.05, 0.5)
+        group.rotation.y = -0.18
+        contactShadow(7, 7, -PIPE_HEIGHT / 2 - 0.05, 0.5)
 
-        camera.position.set(-3, 4.5, 17)
+        camera.position.set(-2.2, 4.2, 18.5)
         controls.target.set(0, 0, 0)
         controls.minPolarAngle = Math.PI * 0.2
         controls.maxPolarAngle = Math.PI * 0.55

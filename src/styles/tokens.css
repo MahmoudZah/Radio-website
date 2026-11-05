@@ -1,21 +1,21 @@
 :root {
   /* palette, in order of how much of the page each one covers */
-  --ink: #0b1c1e; /* hero, theory, measurements, conclusion, footer */
-  --paper: #e1effa; /* reading sections */
-  --concrete: #c5c5c5; /* team and build bands */
-  --teal: #6cabc8; /* data, diagrams, live values */
-  --accent: #ff5321; /* one action per screen, live needles, test points */
+  --ink: #292824; /* hero, theory, measurements, conclusion, footer */
+  --paper: #f1ecdf; /* reading sections */
+  --concrete: #b7b7a1; /* team and build bands */
+  --teal: #8e9b86; /* data, diagrams, live values */
+  --accent: #ed7658; /* one action per screen, live needles, test points */
 
-  --orange-50: #ffe3da;
-  --orange-300: #ff9a7a;
-  --orange-600: #d93a0c;
-  --teal-50: #dcebf3;
-  --teal-200: #a6cde0;
-  --teal-600: #3f7f9e;
-  --teal-800: #1f4a5f;
-  --gray-100: #e0e0e0;
-  --gray-400: #9a9a9a;
-  --gray-600: #6b6b6b;
+  --orange-50: #f8ded4;
+  --orange-300: #f2a089;
+  --orange-600: #c9543c;
+  --teal-50: #e4e6d9;
+  --teal-200: #c4c6ae;
+  --teal-600: #68755f;
+  --teal-800: #454c40;
+  --gray-100: #e6e1d4;
+  --gray-400: #aaa696;
+  --gray-600: #69695f;
 
   --font-display: 'Archivo', 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
   --font-body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
@@ -32,8 +32,8 @@
   --fg: var(--ink);
   --fg-2: var(--teal-800);
   --line: var(--gray-400);
-  --line-soft: rgba(11, 28, 30, 0.14);
-  --panel: rgba(255, 255, 255, 0.45);
+  --line-soft: rgba(41, 40, 36, 0.14);
+  --panel: rgba(241, 236, 223, 0.45);
 }
 
 .band-ink,
@@ -42,9 +42,9 @@
 .topbar {
   --fg: var(--paper);
   --fg-2: var(--teal-200);
-  --line: rgba(166, 205, 224, 0.32);
-  --line-soft: rgba(166, 205, 224, 0.14);
-  --panel: rgba(108, 171, 200, 0.07);
+  --line: rgba(196, 198, 174, 0.32);
+  --line-soft: rgba(196, 198, 174, 0.14);
+  --panel: rgba(142, 155, 134, 0.07);
 }
 .band-concrete {
   --fg-2: var(--teal-800);

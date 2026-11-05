@@ -3,7 +3,7 @@ import { createStage } from './stage'
 
 const base = import.meta.env.BASE_URL
 
-// The dial and knobs face +X in the source file: turn it to face the camera, a little to the left.
+// Keep the radio's dial facing the camera at a shallow three-quarter angle.
 const MODEL_YAW = -Math.PI / 2 + 0.5
 
 /** The interactive 3D valve radio in the hero. Drag to turn it. */
@@ -19,35 +19,19 @@ export function RadioScene({ className = '' }) {
         stage = await createStage(host.current)
         if (disposed) return stage.dispose()
         const { THREE, scene, camera, controls, renderer, start, contactShadow } = stage
-        const { OBJLoader } = await import('three/examples/jsm/loaders/OBJLoader.js')
-
-        const tl = new THREE.TextureLoader()
-        const tex = (name, srgb) =>
-          tl.loadAsync(`${base}models/radio_${name}.jpg`).then((t) => {
-            if (srgb) t.colorSpace = THREE.SRGBColorSpace
-            t.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy())
-            return t
-          })
-
-        const [obj, map, normalMap, aoMap, metalnessMap] = await Promise.all([
-          new OBJLoader().loadAsync(`${base}models/radio.obj`),
-          tex('albedo', true),
-          tex('normal'),
-          tex('ao'),
-          tex('metalness'),
-        ])
+        controls.autoRotate = false
+        const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js')
+        const { scene: obj } = await new GLTFLoader().loadAsync(`${base}models/RadioVintage.glb`)
         if (disposed) return
-
-        const material = new THREE.MeshStandardMaterial({ map, normalMap, aoMap, metalnessMap, metalness: 1, roughness: 0.58 })
-        obj.traverse((c) => c.isMesh && (c.material = material))
 
         const box = new THREE.Box3().setFromObject(obj)
         const size = box.getSize(new THREE.Vector3())
         obj.position.sub(box.getCenter(new THREE.Vector3()))
         const pivot = new THREE.Group()
         pivot.add(obj)
-        const s = 2.6 / Math.max(size.x, size.y, size.z)
+        const s = 2.2 / Math.max(size.x, size.y, size.z)
         pivot.scale.setScalar(s)
+        pivot.position.x = 0.65
         pivot.rotation.y = MODEL_YAW
         scene.add(pivot)
         contactShadow(4.2, 3.2, (-size.y * s) / 2 - 0.01)

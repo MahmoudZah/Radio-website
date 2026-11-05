@@ -163,7 +163,7 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(11, 28, 30, 0.92);
+  background: rgba(41, 40, 36, 0.92);
   -webkit-backdrop-filter: saturate(140%) blur(10px);
   backdrop-filter: saturate(140%) blur(10px);
   color: var(--paper);
@@ -242,10 +242,10 @@
   color: var(--teal-200);
 }
 .nav a:hover {
-  background: rgba(108, 171, 200, 0.14);
+  background: rgba(142, 155, 134, 0.14);
 }
 .nav a[aria-current='true'] {
-  background: rgba(108, 171, 200, 0.2);
+  background: rgba(142, 155, 134, 0.2);
 }
 .nav a[aria-current='true'] .nav-n {
   color: var(--accent);
@@ -270,7 +270,7 @@
 }
 .progress {
   height: 3px;
-  background: rgba(166, 205, 224, 0.12);
+  background: rgba(196, 198, 174, 0.12);
 }
 .progress span {
   display: block;
@@ -371,7 +371,7 @@
   height: 8px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 4px rgba(255, 83, 33, 0.22);
+  box-shadow: 0 0 0 4px rgba(237, 118, 88, 0.22);
 }
 
 /* ================= footer ================= */

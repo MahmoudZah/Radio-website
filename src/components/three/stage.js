@@ -20,12 +20,12 @@ export async function createStage(el, { fov = 30, exposure = 1.05, envIntensity 
   scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture
   scene.environmentIntensity = envIntensity
 
-  // palette lighting: warm key, teal rim
-  scene.add(new THREE.HemisphereLight(0xe1effa, 0x0b1c1e, 0.55))
+  // palette lighting: warm key, sage rim
+  scene.add(new THREE.HemisphereLight(0xf1ecdf, 0x292824, 0.55))
   const key = new THREE.DirectionalLight(0xffd2bf, 2.6)
   key.position.set(-4, 5, 6)
   scene.add(key)
-  const rim = new THREE.DirectionalLight(0x6cabc8, 2.2)
+  const rim = new THREE.DirectionalLight(0x8e9b86, 2.2)
   rim.position.set(5, 3, -6)
   scene.add(rim)
 
