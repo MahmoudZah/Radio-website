@@ -1,0 +1,53 @@
+:root {
+  /* palette, in order of how much of the page each one covers */
+  --ink: #0b1c1e; /* hero, theory, measurements, conclusion, footer */
+  --paper: #e1effa; /* reading sections */
+  --concrete: #c5c5c5; /* team and build bands */
+  --teal: #6cabc8; /* data, diagrams, live values */
+  --accent: #ff5321; /* one action per screen, live needles, test points */
+
+  --orange-50: #ffe3da;
+  --orange-300: #ff9a7a;
+  --orange-600: #d93a0c;
+  --teal-50: #dcebf3;
+  --teal-200: #a6cde0;
+  --teal-600: #3f7f9e;
+  --teal-800: #1f4a5f;
+  --gray-100: #e0e0e0;
+  --gray-400: #9a9a9a;
+  --gray-600: #6b6b6b;
+
+  --font-display: 'Archivo', 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+
+  --r-s: 6px;
+  --r-m: 12px;
+  --r-l: 18px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --bar-h: 60px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* per-band roles (light by default) */
+  --fg: var(--ink);
+  --fg-2: var(--teal-800);
+  --line: var(--gray-400);
+  --line-soft: rgba(11, 28, 30, 0.14);
+  --panel: rgba(255, 255, 255, 0.45);
+}
+
+.band-ink,
+.hero,
+.footer,
+.topbar {
+  --fg: var(--paper);
+  --fg-2: var(--teal-200);
+  --line: rgba(166, 205, 224, 0.32);
+  --line-soft: rgba(166, 205, 224, 0.14);
+  --panel: rgba(108, 171, 200, 0.07);
+}
+.band-concrete {
+  --fg-2: var(--teal-800);
+  --line: var(--gray-600);
+  --panel: var(--paper);
+}

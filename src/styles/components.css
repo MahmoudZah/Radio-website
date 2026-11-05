@@ -1,0 +1,1031 @@
+/* ================= maths ================= */
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  margin: 0 0.12em;
+  line-height: 1.2;
+}
+.frac-n {
+  align-self: stretch;
+  text-align: center;
+  padding: 0 0.25em 0.08em;
+  border-bottom: 2px solid currentColor;
+}
+.frac-d {
+  padding: 0.08em 0.25em 0;
+  white-space: nowrap;
+}
+.sqrt {
+  display: inline-flex;
+  align-items: flex-end;
+  line-height: 1;
+}
+.sqrt-sign {
+  margin-right: -0.06em;
+}
+.sqrt-body {
+  border-top: 2px solid currentColor;
+  padding: 0.06em 0.14em 0;
+  margin-bottom: 0.04em;
+}
+
+/* ================= details ================= */
+.det {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-s);
+  background: var(--panel);
+}
+.det summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  font: 600 0.9375rem/1.3 var(--font-body);
+  color: var(--fg);
+}
+.det summary::-webkit-details-marker {
+  display: none;
+}
+.det-ico {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+.det-ico::before,
+.det-ico::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 6px;
+  height: 2px;
+  background: currentColor;
+  transition: transform 0.2s var(--ease);
+}
+.det-ico::after {
+  transform: rotate(90deg);
+}
+.det[open] .det-ico::after {
+  transform: rotate(0deg);
+}
+.det-body {
+  padding: 14px 16px 18px;
+  border-top: 1px solid var(--line-soft);
+  color: var(--fg);
+  font-size: 0.9625rem;
+}
+.calc {
+  display: grid;
+  gap: 12px;
+  counter-reset: c;
+}
+.calc li {
+  counter-increment: c;
+  position: relative;
+  padding-left: 34px;
+}
+.calc li::before {
+  content: counter(c);
+  position: absolute;
+  left: 0;
+  top: 1px;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--paper);
+  font: 600 0.72rem/1 var(--font-mono);
+}
+
+/* ================= photos ================= */
+.fig {
+  margin: 0;
+  min-width: 0;
+}
+.fig-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-m);
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+.fig-open {
+  all: unset;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: zoom-in;
+}
+.fig-open.is-loading {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+}
+.fig-open:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: -3px;
+}
+.fig-open img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s var(--ease);
+}
+.fig-open:hover img {
+  transform: scale(1.025);
+}
+.fig-corner {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 14px;
+  height: 14px;
+  border-top: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  pointer-events: none;
+}
+.ph {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 6px;
+  padding: 16px;
+  text-align: center;
+  color: var(--fg);
+  border: 2px dashed var(--teal-600);
+  border-radius: inherit;
+  background: repeating-linear-gradient(-45deg, transparent 0 14px, var(--line-soft) 14px 15px);
+}
+.band-ink .ph,
+.hero .ph {
+  border-color: var(--teal);
+}
+.ph-ico {
+  width: 34px;
+  fill: none;
+  stroke: var(--fg-2);
+  stroke-width: 2;
+  margin-bottom: 4px;
+}
+.ph-id {
+  font: 600 0.8125rem/1 var(--font-mono);
+}
+.ph-desc {
+  font-size: 0.875rem;
+  line-height: 1.35;
+  color: var(--fg-2);
+  max-width: 28ch;
+}
+.fig figcaption {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin-top: 10px;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--fg);
+}
+.fig-id {
+  flex: none;
+  font: 600 0.6875rem/1 var(--font-mono);
+  padding: 4px 6px;
+  border-radius: 3px;
+  background: var(--ink);
+  color: var(--teal-200);
+}
+.band-ink .fig-id {
+  background: var(--teal);
+  color: var(--ink);
+}
+.lightbox {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  max-width: min(1100px, 94vw);
+  max-height: 94vh;
+  color: var(--paper);
+}
+.lightbox::backdrop {
+  background: rgba(11, 28, 30, 0.9);
+}
+.lightbox img {
+  max-height: 80vh;
+  width: auto;
+  margin-inline: auto;
+  border-radius: var(--r-m);
+}
+.lightbox p {
+  margin: 12px auto 0;
+  text-align: center;
+  font-size: 0.9375rem;
+}
+.lb-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--accent);
+  color: var(--ink);
+  border: 0;
+  border-radius: var(--r-s);
+  padding: 10px 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ================= 3D stages ================= */
+.stage3d {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.stage3d-canvas {
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+  touch-action: pan-y;
+}
+.stage3d-canvas:active {
+  cursor: grabbing;
+}
+.stage3d-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+.stage3d-msg {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  max-width: none;
+  font: 500 0.875rem/1.4 var(--font-mono);
+  color: var(--fg-2);
+  text-align: center;
+  padding: 20px;
+}
+.tag3d {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 5px 9px;
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--paper);
+  font: 500 0.75rem/1.2 var(--font-mono);
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.tag3d::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 9px;
+  height: 9px;
+  background: inherit;
+  transform: translateX(-50%) rotate(45deg);
+  z-index: -1;
+}
+.tag3d-gap {
+  background: var(--accent);
+  color: var(--ink);
+}
+.drag-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 0.75rem/1 var(--font-mono);
+  color: var(--teal-200);
+}
+.drag-hint.is-light {
+  color: var(--teal-800);
+}
+
+/* ================= radio dial ================= */
+.dial-track {
+  position: relative;
+  height: 34px;
+  border-bottom: 1.5px solid var(--fg-2);
+  margin-bottom: 26px;
+}
+.dial.is-compact .dial-track {
+  height: 22px;
+}
+.dial-range {
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+}
+.dial-range.is-mw {
+  background: repeating-linear-gradient(90deg, rgba(108, 171, 200, 0.18) 0 2px, transparent 2px 6px);
+  height: 60%;
+}
+.dial-range.is-ours {
+  background: var(--teal);
+  height: 100%;
+  opacity: 0.9;
+  border-radius: 3px 3px 0 0;
+}
+.dial-tick {
+  position: absolute;
+  bottom: -7px;
+  width: 1px;
+  height: 7px;
+  background: var(--fg-2);
+}
+.dial-tick span {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  transform: translateX(-50%);
+  font: 500 0.6875rem/1 var(--font-mono);
+  color: var(--fg-2);
+  white-space: nowrap;
+}
+.dial-tick.is-first span {
+  transform: none;
+}
+@media (max-width: 560px) {
+  .dial-tick.is-minor span {
+    display: none;
+  }
+  /* SVG text is drawn in viewBox units, so it shrinks with the drawing: bump it on phones */
+  .rc-tick,
+  .rc-f0-l {
+    font-size: 21px;
+  }
+  .cd-t {
+    font-size: 21px;
+  }
+  .cd-u {
+    font-size: 17px;
+  }
+  .env-lbl {
+    font-size: 22px;
+  }
+  .lv-zone-t,
+  .lv-tick,
+  .lv-row {
+    font-size: 17px;
+  }
+}
+.dial-needle {
+  position: absolute;
+  bottom: -6px;
+  top: -10px;
+  width: 3px;
+  margin-left: -1.5px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: left 0.12s linear;
+}
+.dial-needle::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -4px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font: 500 0.75rem/1.3 var(--font-mono);
+  color: var(--fg-2);
+}
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.legend li::before {
+  content: '';
+  width: 16px;
+  height: 10px;
+  border-radius: 2px;
+}
+.lg-mw::before {
+  background: repeating-linear-gradient(90deg, rgba(108, 171, 200, 0.5) 0 2px, transparent 2px 5px);
+}
+.lg-ours::before {
+  background: var(--teal);
+}
+.lg-needle::before {
+  width: 4px !important;
+  height: 14px !important;
+  background: var(--accent);
+}
+
+/* ================= sliders ================= */
+.slider {
+  display: block;
+  margin: 22px 0 26px;
+}
+.slider input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 32px;
+  background: transparent;
+  cursor: pointer;
+  margin: 0;
+}
+.slider input::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--teal-600), var(--teal));
+}
+.slider input::-moz-range-track {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--teal-600), var(--teal));
+}
+.slider input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  margin-top: -10px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 6px solid var(--accent);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s var(--ease);
+}
+.slider input::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 6px solid var(--accent);
+}
+.slider input:hover::-webkit-slider-thumb {
+  transform: scale(1.12);
+}
+.slider input:focus-visible {
+  outline: none;
+}
+.slider input:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px rgba(255, 83, 33, 0.4);
+}
+.slider-scale {
+  display: flex;
+  justify-content: space-between;
+  font: 500 0.6875rem/1 var(--font-mono);
+  color: var(--fg-2);
+  margin-top: 4px;
+}
+
+/* ================= readout tables ================= */
+.table-wrap {
+  border-radius: var(--r-m);
+  border: 1px solid var(--line);
+  overflow-x: auto;
+  background: var(--panel);
+  margin-block: 20px;
+}
+.table-wrap.is-dark {
+  --fg: var(--paper);
+  --fg-2: var(--teal-200);
+  --line: rgba(166, 205, 224, 0.32);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.table-wrap.is-dark .hot {
+  color: var(--accent);
+}
+.readout {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--fg);
+  font: 400 0.9375rem/1.4 var(--font-mono);
+}
+.readout caption {
+  text-align: left;
+  padding: 14px 18px 12px;
+  font: 600 0.75rem/1.2 var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--fg-2);
+}
+.readout thead th {
+  text-align: left;
+  padding: 10px 18px;
+  background: var(--teal);
+  color: var(--ink);
+  font: 600 0.75rem/1.25 var(--font-mono);
+  vertical-align: bottom;
+}
+.readout td,
+.readout tbody th {
+  padding: 13px clamp(10px, 1.4vw, 18px);
+  border-top: 1px solid var(--line);
+  text-align: left;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.readout tbody th {
+  font-family: var(--font-body);
+  white-space: normal;
+}
+.readout .r {
+  text-align: right;
+}
+.readout td.hot {
+  font-weight: 600;
+}
+@media (max-width: 720px) {
+  /* Table 5 becomes a stacked list on phones */
+  .readout:not(.readout-rows) thead {
+    display: none;
+  }
+  .readout:not(.readout-rows) tbody tr,
+  .readout:not(.readout-rows) tbody td,
+  .readout:not(.readout-rows) tbody th {
+    display: block;
+  }
+  .readout:not(.readout-rows) td[data-k] {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .readout:not(.readout-rows) td[data-k]::before {
+    content: attr(data-k);
+    font-family: var(--font-body);
+    color: var(--fg-2);
+  }
+  .table-wrap.is-dark .readout tbody tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    border-top: 1px solid var(--line);
+    padding: 10px 0;
+  }
+  .table-wrap.is-dark .readout tbody th {
+    grid-column: 1 / -1;
+    border: 0;
+    padding: 4px 16px;
+  }
+  .table-wrap.is-dark .readout tbody td {
+    display: block;
+    border: 0;
+    padding: 2px 16px;
+    text-align: left;
+  }
+}
+
+/* ================= charts ================= */
+.charts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 28px;
+}
+@media (max-width: 760px) {
+  .charts {
+    grid-template-columns: 1fr;
+  }
+}
+.chart {
+  margin: 0;
+  padding: 16px 16px 12px;
+  border-radius: var(--r-m);
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+.chart figcaption {
+  font: 600 0.8125rem/1.3 var(--font-mono);
+  color: var(--fg);
+  margin-bottom: 8px;
+}
+.chart svg {
+  width: 100%;
+  height: auto;
+}
+.ch-grid {
+  stroke: var(--line-soft);
+}
+.ch-tick,
+.ch-unit {
+  font: 500 11.5px var(--font-mono);
+  fill: var(--teal-200);
+}
+.ch-set {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.ch-line {
+  fill: none;
+  stroke: var(--teal);
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+}
+.ch-dot {
+  fill: var(--accent);
+}
+.ch-empty {
+  font: 500 13px var(--font-mono);
+  fill: var(--teal-200);
+}
+
+/* ================= SVG diagram classes ================= */
+.dg {
+  width: 100%;
+  height: auto;
+}
+
+/* signal chain */
+.chain-wire {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+.chain-io-bg {
+  fill: transparent;
+}
+.dg-io path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.chain-node rect {
+  stroke-width: 2;
+}
+.chain-node.is-m1 rect {
+  fill: var(--ink);
+  stroke: var(--ink);
+}
+.chain-node.is-later rect {
+  fill: var(--paper);
+  stroke: var(--teal-800);
+  stroke-dasharray: 7 6;
+}
+.chain-title {
+  font: 600 17px var(--font-body);
+  fill: var(--paper);
+}
+.chain-sub {
+  font: 500 13px var(--font-mono);
+  fill: var(--teal-200);
+}
+.chain-node.is-later .chain-title {
+  fill: var(--teal-800);
+}
+.chain-node.is-later .chain-sub,
+g:not(.chain-node) > .chain-sub {
+  fill: var(--teal-800);
+}
+.chain-pulse {
+  fill: var(--accent);
+}
+
+/* mini symbols */
+.mini {
+  width: 140px;
+  height: 90px;
+  flex: none;
+}
+.m-w {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.m-p {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.6;
+  stroke-linejoin: round;
+}
+.m-fill {
+  fill: var(--teal);
+}
+
+/* schematic */
+.schem .sc-w {
+  fill: none;
+  stroke: var(--teal-200);
+  stroke-width: 2.2;
+}
+.sc-p {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 2.8;
+  stroke-linejoin: round;
+}
+.sc-fill {
+  fill: rgba(108, 171, 200, 0.25);
+}
+.sc-gnd line {
+  stroke: var(--teal-200);
+  stroke-width: 2.2;
+}
+.sc-couple path {
+  fill: none;
+  stroke: var(--teal);
+  stroke-width: 2;
+}
+.sc-couple path:first-child {
+  stroke-dasharray: 5 4;
+}
+.sc-couple text,
+.sc-note {
+  font: 500 14px var(--font-mono);
+  fill: var(--teal-200);
+}
+.sc-lbl {
+  font: 600 16px var(--font-body);
+  fill: var(--paper);
+}
+.sc-tp {
+  fill: var(--accent);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.sc-tpl {
+  font: 600 17px var(--font-mono);
+  fill: var(--accent);
+}
+.sc-dot {
+  fill: var(--teal-200);
+}
+.sp {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.sp-hit {
+  fill: transparent;
+}
+.sp.is-dim {
+  opacity: 0.45;
+}
+.sp.is-on .sp-hit {
+  fill: rgba(108, 171, 200, 0.12);
+  stroke: var(--teal);
+  stroke-dasharray: 4 4;
+  rx: 8;
+}
+.sp.is-on .sc-p {
+  stroke: var(--accent);
+}
+
+/* envelope and staircase */
+.env-axis {
+  stroke: var(--line);
+  stroke-dasharray: 3 5;
+}
+.env-carrier {
+  fill: none;
+  stroke: var(--teal);
+  stroke-width: 1.2;
+}
+.env-peak {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.8;
+}
+.env-lbl {
+  font: 500 12.5px var(--font-mono);
+  fill: var(--teal-200);
+}
+.env-lbl.is-hot {
+  fill: var(--accent);
+  font-weight: 600;
+}
+.st-sine {
+  fill: none;
+  stroke: var(--teal-600);
+  stroke-width: 2;
+}
+.st-stair {
+  fill: none;
+  stroke: var(--orange-600);
+  stroke-width: 2.6;
+}
+.st-dot {
+  fill: var(--ink);
+}
+
+/* resonance curve */
+.rc-grid {
+  stroke: var(--line-soft);
+}
+.rc-fill {
+  fill: rgba(108, 171, 200, 0.16);
+}
+.rc-line {
+  fill: none;
+  stroke: var(--teal);
+  stroke-width: 2.6;
+}
+.rc-07 {
+  stroke: var(--fg-2);
+  stroke-dasharray: 4 5;
+}
+.rc-tick {
+  font: 500 12px var(--font-mono);
+  fill: var(--fg-2);
+}
+.rc-mark {
+  stroke: var(--fg-2);
+  stroke-width: 1.2;
+}
+.rc-bw {
+  stroke: var(--accent);
+  stroke-width: 2;
+  fill: none;
+}
+.rc-f0 {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 2 4;
+}
+.rc-f0-l {
+  font: 600 12.5px var(--font-mono);
+  fill: var(--fg);
+}
+.rc-axis {
+  stroke: var(--fg-2);
+}
+.rc-station {
+  stroke: var(--paper);
+  stroke-width: 2;
+}
+.rc-station-dot {
+  fill: var(--accent);
+}
+
+/* PCB traces */
+.traces {
+  pointer-events: none;
+}
+.traces path,
+.traces circle {
+  fill: none;
+  stroke: var(--teal);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+/* levels */
+.lv-zone {
+  fill: rgba(217, 58, 12, 0.08);
+  stroke: var(--orange-600);
+  stroke-dasharray: 3 4;
+}
+.lv-zone-t,
+.lv-tick,
+.lv-row {
+  font: 500 11.5px var(--font-mono);
+  fill: var(--teal-800);
+}
+.lv-axis {
+  stroke: var(--ink);
+}
+.lv-asked {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.lv-used {
+  fill: var(--accent);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+/* coil drawing */
+.cd-pipe {
+  fill: var(--paper);
+  stroke: var(--teal-200);
+  stroke-width: 2;
+}
+.cd-coil {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.cd-hatch {
+  stroke: var(--accent);
+  stroke-width: 1.4;
+}
+.cd-center {
+  stroke: var(--teal-200);
+  stroke-dasharray: 14 4 3 4;
+}
+.cd-dim {
+  fill: none;
+  stroke: var(--teal-200);
+  stroke-width: 1.5;
+}
+.cd-t {
+  font: 600 14px var(--font-mono);
+  fill: var(--paper);
+}
+.cd-t.is-hot {
+  fill: var(--accent);
+}
+.cd-u {
+  font: 500 12px var(--font-mono);
+  fill: var(--teal-200);
+}
+
+/* part drawings */
+.part-svg {
+  width: 100%;
+  height: auto;
+}
+.part-svg .ln {
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+.part-svg .ln-thin {
+  stroke: var(--ink);
+  stroke-width: 1.2;
+  fill: none;
+}
+.part-svg .ln-light {
+  stroke: var(--gray-100);
+  stroke-width: 1.5;
+}
+.part-svg .ln:not([class*='f-']) {
+  fill: none;
+}
+.f-paper {
+  fill: var(--paper);
+}
+.f-ink {
+  fill: var(--ink);
+}
+.f-teal {
+  fill: var(--teal);
+}
+.f-teal50 {
+  fill: var(--teal-50);
+}
+.f-orange {
+  fill: var(--accent);
+}
+.f-o50 {
+  fill: var(--orange-50);
+}
+.f-o300 {
+  fill: var(--orange-300);
+}
+.f-o600 {
+  fill: var(--orange-600);
+}
+.f-gray {
+  fill: var(--gray-400);
+}
+.f-gray100 {
+  fill: var(--gray-100);
+}
+.part-svg .s-o600 {
+  stroke: var(--orange-600);
+}
+.part-svg .s-orange {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.part-svg .s-teal {
+  stroke: var(--teal);
+  stroke-width: 2;
+}
+.part-svg .s-grid {
+  stroke: rgba(166, 205, 224, 0.25);
+  stroke-width: 1;
+}
+.t-dim,
+.t-ink,
+.t-led,
+.t-dim-l {
+  font: 600 11px var(--font-mono);
+}
+.t-dim {
+  fill: var(--teal-800);
+}
+.t-ink {
+  fill: var(--ink);
+  font-size: 12px;
+}
+.t-led {
+  fill: var(--teal);
+  font-size: 12px;
+}
+.t-dim-l {
+  fill: var(--teal-200);
+  font-size: 9px;
+}
