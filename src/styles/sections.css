@@ -530,6 +530,7 @@
   margin-top: 18px;
 }
 .hang li:hover {
+  z-index: 1;
   transform: rotate(calc(var(--tilt) * -0.6));
 }
 .clip {
@@ -546,6 +547,7 @@
   background: var(--ink);
 }
 .idcard {
+  position: relative;
   width: 100%;
   max-width: 300px;
   background: var(--paper);
@@ -595,6 +597,47 @@
   font: 700 1.25rem/1.2 var(--font-display);
   font-stretch: 108%;
 }
+.team-name {
+  max-width: calc(100% - 88px);
+}
+.team-character {
+  position: absolute;
+  z-index: 1;
+  right: 8px;
+  bottom: -8px;
+  width: 84px;
+  max-height: 112px;
+  object-fit: contain;
+  object-position: bottom;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(10px) scale(0.94);
+  transform-origin: bottom center;
+  filter: drop-shadow(0 8px 10px rgba(41, 40, 36, 0.18));
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease,
+    visibility 0s linear 0.22s;
+}
+.hang li:hover .team-character,
+.team-name:hover + .team-character,
+.team-name:focus-visible + .team-character {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  animation: team-character-float 2.8s ease-in-out 0.22s infinite;
+  transition-delay: 0s;
+}
+@keyframes team-character-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-5px) scale(1);
+  }
+}
 .idcard p {
   margin-top: 4px;
   font-size: 0.875rem;
@@ -617,6 +660,15 @@
   }
   .hang-wire {
     display: none;
+  }
+  .team-character {
+    right: 8px;
+    bottom: -8px;
+    width: 76px;
+    max-height: 102px;
+  }
+  .team-name {
+    max-width: calc(100% - 80px);
   }
 }
 

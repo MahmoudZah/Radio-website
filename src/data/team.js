@@ -3,9 +3,9 @@ export const team = {
   name: 'Team 22',
   group: 'C',
   members: [
-    { name: 'Hend Aboelouon', initials: 'HA' },
-    { name: 'Mahmoud Zahran', initials: 'MZ' },
-    { name: 'Seif El Din Amr', initials: 'SA' },
+    { name: 'Hend Aboelouon', initials: 'HA', portrait: 'hend' },
+    { name: 'Mahmoud Zahran', initials: 'MZ', portrait: 'mahmoud' },
+    { name: 'Seif El Din Amr', initials: 'SA', portrait: 'seif' },
   ],
   together: 'We all worked on every part of the project together.',
   course: 'ELEG103',

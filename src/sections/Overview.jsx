@@ -116,7 +116,16 @@ export function Overview() {
                     <div className={`id-mono ${cardTone[i]}`} aria-hidden="true">
                       {m.initials}
                     </div>
-                    <h3>{m.name}</h3>
+                    <h3 className="team-name" tabIndex={0}>
+                      {m.name}
+                    </h3>
+                    <img
+                      className="team-character"
+                      src={`/images/team/${m.portrait}.webp`}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                    />
                     <p>Every part of M1</p>
                   </article>
                 </li>
