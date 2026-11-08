@@ -26,7 +26,6 @@ export function Analysis() {
   const rows = [
     { q: 'Band’s low end (280 pF)', pred: p.fAtMaxC, meas: band.lowEnd * 1e3 },
     { q: 'Band’s high end, with 20 pF', pred: p.fAtMinC, meas: band.highEnd * 1e3 },
-    { q: 'Band’s high end, with 100 pF (the real minimum)', pred: p.fAtRealMin, meas: band.highEnd * 1e3 },
   ]
   return (
     <section className="band band-paper" id="analysis" aria-labelledby="an-h">
@@ -78,11 +77,10 @@ export function Analysis() {
           </table>
         </div>
 
-        <h3 className="h3-rule">The three bands on one dial</h3>
+        <h3 className="h3-rule">The predicted and measured bands</h3>
         <BandCompare
           rows={[
             { label: 'Predicted, 20–280 pF', from: p.fAtMaxC, to: p.fAtMinC, tone: 'pred' },
-            { label: 'Predicted, 100–280 pF', from: p.fAtMaxC, to: p.fAtRealMin, tone: 'pred2' },
             { label: 'Measured', from: band.lowEnd * 1e3, to: band.highEnd * 1e3, tone: 'meas' },
           ]}
         />

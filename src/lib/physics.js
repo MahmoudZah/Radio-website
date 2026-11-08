@@ -6,7 +6,6 @@ export const design = {
   l: 25, // coil length, mm (about)
   cMin: 20, // pF, nominal
   cMax: 280, // pF
-  cRealMin: 100, // pF, what our meter read
   fTarget: 819e3, // Hz
   r: 15e3, // ohm
   cDet: 3.3e-9, // F
@@ -31,7 +30,6 @@ export const predictions = {
   cFor819: cFor(L, design.fTarget),
   fAtMaxC: f0(L, design.cMax * 1e-12),
   fAtMinC: f0(L, design.cMin * 1e-12),
-  fAtRealMin: f0(L, design.cRealMin * 1e-12),
   rc: design.r * design.cDet,
 }
 
