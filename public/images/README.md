@@ -1,6 +1,6 @@
 # Project photos
 
-Save photos here with exactly these names. A missing photo shows a labelled placeholder (img-04 falls back to the drawn schematic, img-15 is simply hidden).
+Save photos here with exactly these names. A missing photo is omitted instead of showing an empty placeholder (img-04 falls back to the drawn schematic). Keep the available image IDs in `src/data/photos.js` in sync with the files in this folder.
 
 | File | What it shows | Where |
 |---|---|---|

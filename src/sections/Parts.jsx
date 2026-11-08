@@ -64,8 +64,8 @@ export function Parts() {
         </ul>
 
         <div className="photo-duo">
-          <Figure n={2} ratio="4/3" alt="All the Milestone 1 parts laid out on a table." desc="All parts laid out" caption="All the parts, laid out before we started." />
-          <Figure n={3} ratio="4/3" alt="The instruments we used: generator, oscilloscope and multimeter." desc="The instruments we used" caption="The instruments we used." />
+          <Figure n={2} ratio="4/3" alt="All the Milestone 1 parts laid out on a table." caption="All the parts, laid out before we started." />
+          <Figure n={3} ratio="4/3" alt="The instruments we used: generator, oscilloscope and multimeter." caption="The instruments we used." />
         </div>
       </div>
     </section>

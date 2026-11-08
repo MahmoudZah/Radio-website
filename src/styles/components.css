@@ -153,40 +153,6 @@
   border-right: 2px solid var(--accent);
   pointer-events: none;
 }
-.ph {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-content: center;
-  justify-items: center;
-  gap: 6px;
-  padding: 16px;
-  text-align: center;
-  color: var(--fg);
-  border: 2px dashed var(--teal-600);
-  border-radius: inherit;
-  background: repeating-linear-gradient(-45deg, transparent 0 14px, var(--line-soft) 14px 15px);
-}
-.band-ink .ph,
-.hero .ph {
-  border-color: var(--teal);
-}
-.ph-ico {
-  width: 34px;
-  fill: none;
-  stroke: var(--fg-2);
-  stroke-width: 2;
-  margin-bottom: 4px;
-}
-.ph-id {
-  font: 600 0.8125rem/1 var(--font-mono);
-}
-.ph-desc {
-  font-size: 0.875rem;
-  line-height: 1.35;
-  color: var(--fg-2);
-  max-width: 28ch;
-}
 .fig figcaption {
   display: flex;
   gap: 10px;

@@ -45,8 +45,8 @@ export function Measure() {
               </div>
             </dl>
           </div>
-          <Figure n={11} ratio="4/3" alt="The GW Instek generator with its display at 834.0 kHz." desc="Generator, display at 834.0 kHz" caption="The GW Instek generator, display at 834.0 kHz." />
-          <Figure n={12} ratio="4/3" alt="The scope setup with the probe on TP1." desc="The scope setup" caption="The scope setup." />
+          <Figure n={11} ratio="4/3" alt="The GW Instek generator with its display at 834.0 kHz." caption="The GW Instek generator, display at 834.0 kHz." />
+          <Figure n={12} ratio="4/3" alt="The scope setup with the probe on TP1." caption="The scope setup." />
         </div>
 
         {/* 6.1 */}
@@ -74,12 +74,12 @@ export function Measure() {
               <div>
                 <span>band high end</span>
                 <b>
-                  <Val v={band.highEnd} digits={1} unit="kHz" />
+                  <Val v={band.highEnd} unit="kHz" />
                 </b>
               </div>
             </div>
           </div>
-          <Figure n={13} ratio="16/10" alt="Scope screenshot of TP1 at resonance." desc="Scope screenshot of TP1 at resonance" caption="TP1 at resonance." className="mrow-fig" />
+          <Figure n={13} ratio="16/10" alt="Scope screenshot of TP1 at resonance." caption="TP1 at resonance." className="mrow-fig" />
         </article>
 
         {/* 6.2 */}
@@ -93,11 +93,11 @@ export function Measure() {
                 <caption>Table 5 · The tank at TP1</caption>
                 <thead>
                   <tr>
-                    <th scope="col">Band low end</th>
-                    <th scope="col">Band high end</th>
-                    <th scope="col">f₀ at half travel</th>
-                    <th scope="col">f_low</th>
-                    <th scope="col">f_high</th>
+                    <th scope="col">Band low end (kHz)</th>
+                    <th scope="col">Band high end (kHz)</th>
+                    <th scope="col">f₀ at half travel (kHz)</th>
+                    <th scope="col">f_low (kHz)</th>
+                    <th scope="col">f_high (kHz)</th>
                     <th scope="col">Q</th>
                   </tr>
                 </thead>
@@ -107,7 +107,7 @@ export function Measure() {
                       <Val v={band.lowEnd} digits={1} unit="kHz" />
                     </td>
                     <td data-k="Band high end">
-                      <Val v={band.highEnd} digits={1} unit="kHz" />
+                      <Val v={band.highEnd} unit="kHz" />
                     </td>
                     <td data-k="f₀ at half travel">
                       <Val v={band.f0Half} unit="kHz" />
@@ -119,20 +119,20 @@ export function Measure() {
                       <Val v={band.fHigh} unit="kHz" />
                     </td>
                     <td data-k="Q" className="hot">
-                      <Val v={q} digits={1} />
+                      <Val v={q} digits={2} />
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <p className="calc-line">
-              Q = 491 / (530 − 460) = <b>{q?.toFixed(2)}</b>. That is a broad, gentle peak rather than a sharp one.
+              Q = <b>{q?.toFixed(2)}</b> (reported). The listed cutoff frequencies are rounded.
             </p>
           </div>
           <div className="mrow-fig scope">
             <div className="scope-bar">
               <span>TP1 · measured points</span>
-              <span className="hot">Q {q?.toFixed(1)}</span>
+              <span className="hot">Q {q?.toFixed(2)}</span>
             </div>
             <ResonanceCurve id="meas" f0={band.f0Half} Q={q} fLow={band.fLow} fHigh={band.fHigh} span={0.3} />
           </div>
@@ -148,7 +148,7 @@ export function Measure() {
             <p>At f₀ we recorded TP1’s peak and TP3’s DC at six generator settings.</p>
             <div className="table-wrap">
               <table className="readout readout-rows">
-                <caption>Table 6 · The detector at f₀ = 491 kHz</caption>
+                <caption>Table 6 · The detector at f₀ = 1.072 MHz</caption>
                 <thead>
                   <tr>
                     <th scope="col">Generator setting (V)</th>
@@ -176,7 +176,7 @@ export function Measure() {
               </table>
             </div>
           </div>
-          <Figure n={14} ratio="4/3" alt="TP3 DC level on the multimeter or scope." desc="TP3 DC on the multimeter or scope" caption="TP3 DC on the meter." className="mrow-fig" />
+          <Figure n={14} ratio="4/3" alt="TP3 DC level on the multimeter or scope." caption="TP3 DC on the meter." className="mrow-fig" />
         </article>
         <div className="charts">
           <Chart title="TP3 DC vs generator setting" unit="mV" rows={detector.map((r) => ({ x: r.src, y: r.tp3 }))} />

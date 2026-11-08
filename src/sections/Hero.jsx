@@ -46,12 +46,12 @@ export function Hero() {
             </div>
             <div>
               <dt>Q</dt>
-              <dd>{qFactor()?.toFixed(1)}</dd>
+              <dd>{qFactor()?.toFixed(2)}</dd>
             </div>
             <div>
               <dt>band</dt>
               <dd>
-                {Math.round(band.lowEnd)}–{Math.round(band.highEnd)} kHz
+                {band.lowEnd.toFixed(1)}–{Math.round(band.highEnd)} kHz
               </dd>
             </div>
           </dl>

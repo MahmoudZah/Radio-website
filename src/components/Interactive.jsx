@@ -1,6 +1,6 @@
 import { useId, useState } from 'react'
 import { L, f0, fmt, tankResponse } from '../lib/physics'
-import { band, have } from '../data/measurements'
+import { band, have, qFactor } from '../data/measurements'
 import { ResonanceCurve } from './svg/Diagrams'
 
 /* Log-scale dial from 300 kHz to 2.4 MHz */
@@ -103,15 +103,15 @@ export function Tuner() {
 /** How Q decides whether a neighbouring station leaks through. */
 export function QPlay() {
   const id = useId()
-  const [q, setQ] = useState(7)
-  const fc = have(band.f0Half) ? band.f0Half : 491
+  const [q, setQ] = useState(qFactor() ?? 7)
+  const fc = have(band.f0Half) ? band.f0Half : 1072
   const leak = tankResponse(fc + 9, fc, q)
   const bw = fc / q
   return (
     <div className="qplay">
       <div className="qplay-ctrl">
         <p className="tr-k">Play with Q · how selective is the tank?</p>
-        <p className="qp-q" aria-live="polite">Q = {q}</p>
+        <p className="qp-q" aria-live="polite">Q = {q.toFixed(2)}</p>
         <dl className="qp-facts">
           <div>
             <dt>bandwidth</dt>
@@ -124,16 +124,16 @@ export function QPlay() {
         </dl>
       <label className="slider" htmlFor={id}>
         <span className="sr-only">Quality factor</span>
-        <input id={id} type="range" min="3" max="120" step="1" value={q} onChange={(e) => setQ(+e.target.value)} />
+        <input id={id} type="range" min="3" max="120" step="0.01" value={q} onChange={(e) => setQ(+e.target.value)} />
         <span className="slider-scale" aria-hidden="true">
           <span>3</span>
-          <span>ours: 7</span>
+          <span>ours: {qFactor()?.toFixed(2) ?? '—'}</span>
           <span>120</span>
         </span>
       </label>
       <p className="qp-note">
-        The orange squares are stations 9 kHz either side of ours, the spacing used for medium wave in our region. Around Q = 55
-        the bandwidth matches that spacing.
+        The orange squares are stations 9 kHz either side of ours, the spacing used for medium wave in our region. Around Q = 120
+        the bandwidth matches that spacing near our measured resonance.
       </p>
       </div>
       <div className="qplay-plot">

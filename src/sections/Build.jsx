@@ -28,14 +28,12 @@ const steps = [
   {
     title: 'Find the right capacitor terminals',
     body: (
-      <>
-        <p>
-          Our capacitor has several gangs and several legs, and we did not know which ones were the AM section. Our meter read about
-          0.1 to 0.28 nF for the AM section once we found it. We did not mount the capacitor on the pipe.
-        </p>
-        <CapLegs />
-      </>
+      <p>
+        Our capacitor has several gangs and several legs, and we did not know which ones were the AM section. Our meter read about
+        0.1 to 0.28 nF for the AM section once we found it. We did not mount the capacitor on the pipe.
+      </p>
     ),
+    visual: <CapLegs />,
     img: { n: 8, desc: 'Capacitor and the multimeter readings', alt: 'The tuning capacitor with the multimeter reading its AM section.' },
   },
   {
@@ -96,11 +94,15 @@ export function Build() {
                   </p>
                 )}
               </div>
-              <Figure n={s.img.n} ratio="4/3" alt={s.img.alt} desc={s.img.desc} caption={s.img.desc + '.'} className="step-fig" />
+              {s.visual ? (
+                <div className="step-fig step-visual">{s.visual}</div>
+              ) : (
+                <Figure n={s.img.n} ratio="4/3" alt={s.img.alt} caption={s.img.desc + '.'} className="step-fig" />
+              )}
             </li>
           ))}
         </ol>
-        <Figure n={10} ratio="21/9" className="finished" alt="The finished Milestone 1 build." desc="The finished M1" caption="The finished M1." />
+        <Figure n={10} ratio="21/9" className="finished" alt="The finished Milestone 1 build." caption="The finished M1." />
       </div>
     </section>
   )

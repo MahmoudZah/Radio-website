@@ -488,52 +488,6 @@ export function Staircase() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Generator levels: asked for vs. used                                */
-/* ------------------------------------------------------------------ */
-
-export function Levels({ asked, used, floor }) {
-  const W = 420
-  const H = 150
-  const x = (v) => 24 + (v / 1.2) * (W - 48)
-  return (
-    <svg className="dg levels" viewBox={`0 0 ${W} ${H}`} role="img" aria-labelledby="lv-t">
-      <title id="lv-t">
-        The levels the experiment asks for (0.05 to 1 V) compared with the six levels we used (0.1587 to 1.135 V). The generator
-        cannot go below 0.1587 V.
-      </title>
-      <rect className="lv-zone" x={x(0)} y="18" width={x(floor) - x(0)} height="104" />
-      <text className="lv-zone-t" x={x(floor) + 6} y="14">
-        ← below the knob’s minimum, {floor} V
-      </text>
-      <line className="lv-axis" x1={x(0)} x2={x(1.2)} y1="70" y2="70" />
-      {[0, 0.2, 0.4, 0.6, 0.8, 1, 1.2].map((v) => (
-        <g key={v}>
-          <line className="lv-axis" x1={x(v)} x2={x(v)} y1="66" y2="74" />
-          <text className="lv-tick" x={x(v)} y="146" textAnchor="middle">
-            {v}
-          </text>
-        </g>
-      ))}
-      <text className="lv-row" x={x(0)} y="36">
-        asked
-      </text>
-      {asked.map((v) => (
-        <rect key={v} className="lv-asked" x={x(v) - 5} y="44" width="10" height="10" />
-      ))}
-      <text className="lv-row" x={x(0)} y="118">
-        used
-      </text>
-      {used.map((v) => (
-        <rect key={v} className="lv-used" x={x(v) - 5} y="86" width="10" height="10" />
-      ))}
-      <text className="lv-tick" x={W - 6} y="132" textAnchor="end">
-        V
-      </text>
-    </svg>
-  )
-}
-
-/* ------------------------------------------------------------------ */
 /* Dimensioned drawing of the coil on its pipe                         */
 /* ------------------------------------------------------------------ */
 

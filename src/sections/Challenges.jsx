@@ -1,11 +1,10 @@
 import { Figure, SectionHead } from '../components/ui'
-import { Levels, Staircase } from '../components/svg/Diagrams'
-import { detector } from '../data/measurements'
+import { Staircase } from '../components/svg/Diagrams'
 
 const cases = [
   {
     title: 'No generator above 1 MHz',
-    problem: 'The medium-wave band runs up to about 2 MHz, but the generators we found stopped at 1 MHz.',
+    problem: 'The medium-wave band runs up to about 2 MHz, but our first, malfunctioning generator stopped at 1 MHz.',
     tried: 'We built our own source (challenge 2).',
     worked: 'Finding a better generator (challenge 3).',
     lesson: 'Check an instrument’s range against the highest frequency you need before planning the measurements.',
@@ -25,7 +24,7 @@ const cases = [
           <span className="lg-sine">ideal 850 kHz sine</span>
           <span className="lg-stair">what 4 samples per cycle give</span>
         </p>
-        <Figure n={15} optional ratio="16/9" alt="Scope photo of the AM signal from the ESP32." desc="Scope photo of the ESP32 AM signal" caption="The AM signal from the ESP32 on our scope." />
+        <Figure n={15} ratio="16/9" alt="Scope photo of the AM signal from the ESP32." caption="The AM signal from the ESP32 on our scope." />
       </div>
     ),
   },
@@ -33,7 +32,7 @@ const cases = [
     title: 'The right instrument',
     problem: 'We needed a clean source that covers the whole band.',
     tried: 'Looking for a generator with more range.',
-    worked: 'A GW Instek function generator that goes up to 2 MHz, enough to cover the whole band. We used it instead of the ESP32 for all the measurements.',
+    worked: 'We replaced it with a GW Instek function generator that goes up to 2 MHz, enough to cover the whole band. We used it for the new measurements.',
     lesson: 'The ESP32 can still be useful later, for audio-frequency tests.',
   },
   {
@@ -44,16 +43,11 @@ const cases = [
     lesson: 'When a part is unlabelled, the meter is the datasheet.',
   },
   {
-    title: 'The generator would not go low enough',
-    problem: 'The experiment asks for source levels of 0.05, 0.1, 0.2, 0.3, 0.5 and 1 V. Our generator’s output level knob would not go below 0.1587 V.',
-    tried: 'Every other setting was within range.',
-    worked: 'We used six evenly spaced levels from 0.1587 V to 1.135 V instead.',
-    lesson: 'When an instrument limits the plan, keep the spirit of the test (six levels across the range) and say exactly what changed.',
-    visual: (
-      <div className="case-visual">
-        <Levels asked={[0.05, 0.1, 0.2, 0.3, 0.5, 1]} used={detector.map((d) => d.src)} floor={0.1587} />
-      </div>
-    ),
+    title: 'The first generator gave conflicting readings',
+    problem: 'Our first function generator was malfunctioning, so its readings did not agree with the circuit’s response.',
+    tried: 'We replaced it and repeated the measurements with the new generator.',
+    worked: 'Tables 5 and 6 use the readings from the replacement generator.',
+    lesson: 'Use one verified source for a measurement set, and do not mix readings from different instruments.',
   },
 ]
 

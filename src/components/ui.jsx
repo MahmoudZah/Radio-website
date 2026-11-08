@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { have } from '../data/measurements'
+import { availablePhotoIds } from '../data/photos'
 
 const base = import.meta.env.BASE_URL
 
@@ -59,16 +60,13 @@ export function SectionHead({ n, label, title, sub, intro, id }) {
   )
 }
 
-/**
- * Photo in a fixed-ratio frame with a caption and click-to-enlarge.
- * Looks for /images/img-XX.jpg; if it is missing: a labelled placeholder,
- * `fallback` content, or nothing when `optional`.
- */
-export function Figure({ n, alt, caption, ratio = '4/3', desc, fallback, optional = false, className = '' }) {
+/** Photo in a fixed-ratio frame with a caption and click-to-enlarge. */
+export function Figure({ n, alt, caption, ratio = '4/3', fallback, className = '' }) {
   const id = String(n).padStart(2, '0')
   const src = `${base}images/img-${id}.jpg`
   const [status, setStatus] = useState('loading')
   const dlg = useRef(null)
+  const missing = !availablePhotoIds.has(Number(n)) || status === 'error'
 
   useEffect(() => {
     const d = dlg.current
@@ -78,8 +76,7 @@ export function Figure({ n, alt, caption, ratio = '4/3', desc, fallback, optiona
     return () => d.removeEventListener('click', onClick)
   }, [status])
 
-  if (status === 'error' && optional) return null
-  const missing = status === 'error'
+  if (missing && !fallback) return null
 
   return (
     <figure className={`fig ${className}`}>
@@ -95,19 +92,7 @@ export function Figure({ n, alt, caption, ratio = '4/3', desc, fallback, optiona
             <img src={src} alt={alt} loading="lazy" onLoad={() => setStatus('ok')} onError={() => setStatus('error')} />
           </button>
         )}
-        {status === 'loading' && fallback}
-        {missing &&
-          (fallback ?? (
-            <div className="ph" role="img" aria-label={`Photo to come, IMG-${id}: ${desc || alt}`}>
-              <svg className="ph-ico" viewBox="0 0 48 36" aria-hidden="true">
-                <rect x="1" y="6" width="46" height="29" rx="4" />
-                <path d="M15 6 18 1h12l3 5" />
-                <circle cx="24" cy="20" r="8" />
-              </svg>
-              <span className="ph-id">IMG-{id}</span>
-              <span className="ph-desc">{desc || alt}</span>
-            </div>
-          ))}
+        {missing && fallback}
         <span className="fig-corner" aria-hidden="true" />
       </div>
       {caption && (

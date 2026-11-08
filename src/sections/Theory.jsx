@@ -71,7 +71,7 @@ export function Theory() {
             <ResonanceCurve id="theory-q" f0={band.f0Half} Q={q} fLow={band.fLow} fHigh={band.fHigh} span={0.3} />
             <p className="t-small">
               f<sub>low</sub> and f<sub>high</sub> are the frequencies where the signal falls to 0.7 of its peak. This is our measured
-              tank: 460 and 530 kHz around 491 kHz.
+              tank: 960 and 1201 kHz around 1072 kHz.
             </p>
           </article>
         </div>
@@ -93,7 +93,7 @@ export function Theory() {
             </p>
             <Details summary="Why 50 µs is the right size">
               <p>
-                A carrier near 500 kHz repeats every 2 µs, so the capacitor barely sags between peaks. Speech changes over hundreds of
+                A carrier near 1 MHz repeats every 1 µs, so the capacitor barely sags between peaks. Speech changes over hundreds of
                 microseconds, so 50 µs is short enough to follow it: 2 µs ≪ 50 µs ≪ 200 µs (a 5 kHz tone).
               </p>
             </Details>
@@ -119,7 +119,6 @@ export function Theory() {
               ratio="12/5"
               className="schem-fig"
               alt="Our redrawn schematic: generator, 5-turn test loop, 75-turn coil with variable capacitor (TP1), 1N60P, then 15 kΩ in parallel with 3.3 nF (TP3)."
-              desc="Our redrawn schematic"
               caption="Generator → 5-turn test loop → 75-turn coil + variable capacitor (TP1) → 1N60P → 15 kΩ ∥ 3.3 nF (TP3)."
               fallback={
                 <div className="schem-scroll" tabIndex={0} role="region" aria-label="Schematic, scrolls sideways on small screens">

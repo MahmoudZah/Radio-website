@@ -765,6 +765,12 @@
   margin-top: clamp(40px, 6vw, 72px);
   align-items: start;
 }
+.photo-duo:not(:has(> .fig)) {
+  display: none;
+}
+.photo-duo:has(> .fig):not(:has(> .fig ~ .fig)) {
+  grid-template-columns: minmax(0, 1fr);
+}
 @media (max-width: 700px) {
   .photo-duo {
     grid-template-columns: 1fr;
@@ -1153,6 +1159,9 @@
 .step-fig {
   grid-area: fig;
 }
+.step-visual {
+  min-width: 0;
+}
 .rail {
   grid-area: rail;
   position: relative;
@@ -1205,6 +1214,10 @@
     grid-template-columns: 52px minmax(0, 1fr);
     grid-template-areas: 'rail copy' 'rail fig';
   }
+  .step:not(:has(> .step-fig)),
+  .step.flip:not(:has(> .step-fig)) {
+    grid-template-areas: 'rail copy';
+  }
   .step-copy {
     padding: 2px 0 20px 8px;
   }
@@ -1228,13 +1241,16 @@
 /* capacitor legs, step 4 */
 .caplegs {
   display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
   align-items: center;
   background: var(--ink);
   border-radius: var(--r-m);
   padding: 14px;
-  margin: 6px 0 12px;
+  margin: 0;
+}
+.step-visual .caplegs .dg {
+  width: 100%;
 }
 .cl-body {
   fill: rgba(196, 198, 174, 0.12);
@@ -1314,6 +1330,12 @@
   gap: 24px;
   align-items: start;
 }
+.setup:not(:has(> .fig)) {
+  grid-template-columns: minmax(0, 1fr);
+}
+.setup:has(> .fig):not(:has(> .fig ~ .fig)) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
 .setup-note h3,
 .mrow h3 {
   font: 750 1.5rem/1.1 var(--font-display);
@@ -1357,6 +1379,9 @@
   .setup {
     grid-template-columns: 1fr;
   }
+  .setup:has(> .fig) {
+    grid-template-columns: 1fr;
+  }
 }
 .mrow {
   display: grid;
@@ -1366,6 +1391,9 @@
   margin-top: clamp(56px, 8vw, 96px);
   padding-top: 28px;
   border-top: 1px solid var(--line);
+}
+.mrow:not(:has(> .mrow-fig)) {
+  grid-template-columns: 90px minmax(0, 1fr);
 }
 .mrow-n {
   font: 800 clamp(2rem, 4vw, 3rem) / 1 var(--font-display);
@@ -1410,12 +1438,18 @@
   .mrow {
     grid-template-columns: 70px minmax(0, 1fr);
   }
+  .mrow:not(:has(> .mrow-fig)) {
+    grid-template-columns: 70px minmax(0, 1fr);
+  }
   .mrow-fig {
     grid-column: 2;
   }
 }
 @media (max-width: 600px) {
   .mrow {
+    grid-template-columns: 1fr;
+  }
+  .mrow:not(:has(> .mrow-fig)) {
     grid-template-columns: 1fr;
   }
   .mrow-fig {

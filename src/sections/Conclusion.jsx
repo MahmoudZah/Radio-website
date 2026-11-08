@@ -30,11 +30,11 @@ export function Conclusion() {
           </ul>
           <div className="concl-text">
             <p className="concl-lead">
-              The tank picks one frequency (Q ≈ {qFactor()?.toFixed(0)}) and the detector turns the signal’s peaks into a DC level.
+              The tank picks one frequency (Q = {qFactor()?.toFixed(2)}) and the detector turns the signal’s peaks into a DC level.
             </p>
             <p>
-              Our measured band was lower and narrower than predicted, mostly because the capacitor’s real range starts at about 100
-              pF, plus stray capacitance in the circuit.
+              With the replacement generator, our measured tuning band is 972.4 kHz to 1.126 MHz, with resonance at 1.072 MHz. These
+              readings replace the conflicting results from the malfunctioning generator.
             </p>
           </div>
         </div>

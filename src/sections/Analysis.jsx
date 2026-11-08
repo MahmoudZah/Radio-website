@@ -6,7 +6,7 @@ import { fmt, pctErr, predictions as p } from '../lib/physics'
 const reasons = [
   {
     t: 'The capacitor’s real range',
-    d: 'The prediction assumed 20 to 280 pF. Our meter showed the AM section really covers about 100 to 280 pF. This explains most of the missing high end: that range gives a frequency ratio of about 1.7, close to the 1.5 we measured.',
+    d: 'The prediction assumed 20 to 280 pF. Our meter showed the AM section really covers about 100 to 280 pF, which changes the predicted tuning range. The replacement generator measured 972.4 kHz to 1.126 MHz.',
   },
   {
     t: 'Extra capacitance',
@@ -18,7 +18,7 @@ const reasons = [
   },
   {
     t: 'A broad peak',
-    d: 'A tank with Q ≈ 7 is not very sharp, so the peak is broad and the exact frequency is hard to read.',
+    d: 'The reported Q is 4.51, so the peak is broad and the exact cutoff frequencies are harder to read.',
   },
 ]
 
@@ -36,7 +36,7 @@ export function Analysis() {
           n="07"
           label="Analysis"
           title="Predicted vs measured"
-          sub="Lower and narrower than we thought."
+          sub="A narrow measured band around 1.07 MHz."
           intro={<p>Percent error = 100 × (prediction − measured) / measured.</p>}
         />
 
@@ -67,7 +67,10 @@ export function Analysis() {
                     <th scope="row">{r.q}</th>
                     <td className="r">{r.pred >= 1e6 ? fmt.MHz(r.pred) : fmt.kHz(r.pred)}</td>
                     <td className="r">{(r.meas / 1e3).toFixed(1)} kHz</td>
-                    <td className="r hot">+{Math.round(e)} %</td>
+                    <td className="r hot">
+                      {e > 0 ? '+' : ''}
+                      {Math.round(e)} %
+                    </td>
                   </tr>
                 )
               })}
@@ -85,7 +88,7 @@ export function Analysis() {
         />
         <p className="muted small">The pale strip in each row is the medium-wave broadcast band, 531–1602 kHz.</p>
 
-        <h3 className="h3-rule">Why the band is lower and narrower than predicted</h3>
+        <h3 className="h3-rule">Why measured results differ from predictions</h3>
         <ol className="reasons">
           {reasons.map((r, i) => (
             <li key={r.t}>
