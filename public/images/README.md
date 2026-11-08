@@ -14,7 +14,7 @@ Save photos here with exactly these names. A missing photo is omitted instead of
 | img-08.jpg | Capacitor and the multimeter readings | step 4 |
 | img-09.jpg | Detector on the breadboard | step 5 |
 | img-10.jpg | The finished M1 (wide, 21:9 frame) | end of 05 |
-| img-11.jpg | GW Instek generator, display at 834.0 kHz | 06 Setup |
+| img-11.jpg | Function generator, display at 834.0 kHz | 06 Setup |
 | img-12.jpg | The scope setup | 06 Setup |
 | img-13.jpg | Scope screenshot of TP1 at resonance | 6.1 |
 | img-14.jpg | TP3 DC on the multimeter or scope | 6.3 |

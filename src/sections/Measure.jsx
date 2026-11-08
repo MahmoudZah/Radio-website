@@ -33,11 +33,11 @@ export function Measure() {
             <dl className="spec">
               <div>
                 <dt>Source</dt>
-                <dd>GW Instek, into the 5-turn loop</dd>
+                <dd>function generator, into the 5-turn loop</dd>
               </div>
               <div>
                 <dt>TP1</dt>
-                <dd>OWON SDS1102, ×10 probe</dd>
+                <dd>oscilloscope, ×10 probe</dd>
               </div>
               <div>
                 <dt>TP3</dt>
@@ -45,7 +45,7 @@ export function Measure() {
               </div>
             </dl>
           </div>
-          <Figure n={11} ratio="4/3" alt="The GW Instek generator with its display at 834.0 kHz." caption="The GW Instek generator, display at 834.0 kHz." />
+          <Figure n={11} ratio="4/3" alt="The function generator with its display at 834.0 kHz." caption="The function generator, display at 834.0 kHz." />
           <Figure n={12} ratio="4/3" alt="The scope setup with the probe on TP1." caption="The scope setup." />
         </div>
 

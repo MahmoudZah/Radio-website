@@ -14,8 +14,8 @@ const parts = [
 ]
 
 const tools = [
-  { name: 'Function generator', spec: `${team.generator}, up to 2 MHz`, Icon: P.FuncGen },
-  { name: 'Oscilloscope', spec: `${team.scope}, ×10 probe`, Icon: P.Scope },
+  { name: 'Function generator', spec: 'up to 2 MHz', Icon: P.FuncGen },
+  { name: 'Oscilloscope', spec: '×10 probe', Icon: P.Scope },
   { name: 'Digital multimeter', spec: 'Ω, capacitance and DC', Icon: P.Multimeter },
   { name: 'Sandpaper or a blade', spec: 'to strip the enamel', Icon: P.Sandpaper },
   { name: 'ESP32 board', spec: 'our first attempt at a source', Icon: P.Esp32 },

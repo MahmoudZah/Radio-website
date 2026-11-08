@@ -12,8 +12,8 @@ export const team = {
   courseTitle: 'Analog and Digital Electronics',
   school: 'SBME, Cairo University',
   term: 'Fall 2026',
-  scope: 'OWON SDS1102',
-  generator: 'GW Instek GFG-8020 series',
+  scope: 'oscilloscope',
+  generator: 'function generator',
 }
 
 export const milestones = [

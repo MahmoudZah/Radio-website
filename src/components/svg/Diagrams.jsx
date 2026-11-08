@@ -149,7 +149,7 @@ const coilPath = (x, y0, humps, len, dir) => {
 }
 
 export const schematicParts = [
-  { id: 'gen', name: 'Generator', text: 'GW Instek function generator. It drives the test loop with a clean sine up to 2 MHz.' },
+  { id: 'gen', name: 'Generator', text: 'Function generator. It drives the test loop with a clean sine up to 2 MHz.' },
   { id: 'loop', name: '5-turn test loop', text: 'Wound on the same pipe. It passes the signal to the coil by magnetic coupling, so the generator never touches the tank.' },
   { id: 'coil', name: '75-turn coil', text: 'The L of the tank. Wheeler predicts about 291 µH.' },
   { id: 'cap', name: 'Tuning capacitor', text: 'The C of the tank. Turning it moves the resonance. Ours really covers about 100 to 280 pF.' },

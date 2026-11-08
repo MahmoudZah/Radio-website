@@ -32,7 +32,7 @@ const cases = [
     title: 'The right instrument',
     problem: 'We needed a clean source that covers the whole band.',
     tried: 'Looking for a generator with more range.',
-    worked: 'We replaced it with a GW Instek function generator that goes up to 2 MHz, enough to cover the whole band. We used it for the new measurements.',
+    worked: 'We replaced it with a function generator that goes up to 2 MHz, enough to cover the whole band. We used it for the new measurements.',
     lesson: 'The ESP32 can still be useful later, for audio-frequency tests.',
   },
   {

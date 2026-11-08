@@ -103,7 +103,7 @@ export const Tape = () => (
 )
 
 export const FuncGen = () => (
-  <Svg label="GW Instek function generator showing 834.0 kHz">
+  <Svg label="Function generator showing 834.0 kHz">
     <rect className="ln f-gray100" x="8" y="18" width="144" height="66" rx="4" />
     <rect className="f-ink" x="18" y="28" width="66" height="24" rx="2" />
     <text className="t-led" x="51" y="45" textAnchor="middle">834.0 kHz</text>
@@ -119,7 +119,7 @@ export const FuncGen = () => (
 )
 
 export const Scope = () => (
-  <Svg label="OWON SDS1102 oscilloscope">
+  <Svg label="Oscilloscope">
     <rect className="ln f-gray100" x="8" y="14" width="144" height="74" rx="4" />
     <rect className="f-ink" x="16" y="22" width="84" height="56" rx="2" />
     {[1, 2, 3].map((i) => (
